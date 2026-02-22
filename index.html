@@ -14,8 +14,6 @@
       --text: rgba(245,248,255,.96);
       --muted: rgba(245,248,255,.72);
       --border: rgba(255,255,255,.14);
-      --glass: rgba(255,255,255,.08);
-      --glass2: rgba(255,255,255,.06);
       --shadow: 0 20px 80px rgba(0,0,0,.55);
       --radius: 22px;
       --max: 1160px;
@@ -40,7 +38,7 @@
       position:fixed; inset:0; z-index:-4;
       background:
         linear-gradient(180deg, rgba(7,11,20,.50), rgba(7,11,20,.88)),
-        url("assets/bg.jpg") center/cover no-repeat;
+        url("./assets/bg.jpg") center/cover no-repeat;
       filter: saturate(1.05) contrast(1.06);
       transform: scale(1.02);
     }
@@ -359,8 +357,7 @@
       <div class="nav">
         <a class="brand" href="#top">
           <div class="brandLogo" aria-label="Logo">
-            <!-- Placeholder logo -->
-            <img src="assets/logo.png" alt="Logo" />
+            <img src="./assets/logo.png" alt="Logo" />
           </div>
           <div class="brandText">
             <b>Ordinanca Stomatologjike</b>
@@ -382,7 +379,7 @@
   <main id="top">
     <div class="container hero">
       <div class="heroGrid">
-        <!-- Left: message -->
+        <!-- Left -->
         <div class="card reveal">
           <div class="cardInner">
             <div class="badge">🦷 Kujdes modern • Qasje 1-me-1 • Rezervim i shpejtë</div>
@@ -415,7 +412,7 @@
           </div>
         </div>
 
-        <!-- Right: booking form -->
+        <!-- Right: Booking -->
         <div class="card reveal" style="animation-delay:.08s" id="rezervo">
           <div class="cardInner">
             <h2 class="formTitle">Rezervo Termin</h2>
@@ -432,7 +429,7 @@
               <div class="row2">
                 <div class="field">
                   <label for="phone">Numri i telefonit</label>
-                  <input id="phone" name="phone" placeholder="p.sh. +383 44 123 456" autocomplete="tel" />
+                  <input id="phone" name="phone" placeholder="p.sh. +383 49 660 661" autocomplete="tel" />
                 </div>
                 <div class="field">
                   <label for="service">Arsyeja / Shërbimi</label>
@@ -564,11 +561,13 @@
   </a>
 
   <script>
-    // ✅ Ndrysho vetëm këtu (pa +, vetëm numra) p.sh. 38344123456
-    const WHATSAPP_NUMBER = "383XXXXXXXXX";
+    // ✅ Numri i ordinancës (pa +)
+    const WHATSAPP_NUMBER = "38349660661";
 
     // Default text (kur klikon vetëm WhatsApp)
-    const QUICK_TEXT = encodeURIComponent("Përshëndetje Dr. Besfort, dua të rezervoj termin.");
+    const QUICK_TEXT = encodeURIComponent(
+      "Përshëndetje Ordinanca Stomatologjike Dr. Besfort M Xhemajli, dua të rezervoj termin."
+    );
 
     function waQuickLink(){
       return `https://wa.me/${WHATSAPP_NUMBER}?text=${QUICK_TEXT}`;
@@ -598,7 +597,7 @@
       }
 
       const msgLines = [
-        "Përshëndetje Dr. Besfort, dua të rezervoj termin:",
+        "Përshëndetje Ordinanca Stomatologjike Dr. Besfort M Xhemajli, dua të rezervoj termin:",
         "",
         `Emri: ${name}`,
         `Telefoni: ${phone}`,
