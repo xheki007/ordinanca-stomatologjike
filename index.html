@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="sq">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ordinanca Stomatologjike Dr. Besfort M Xhemajli</title>
+
+  <meta name="description" content="Ordinanca Stomatologjike Dr. Besfort M Xhemajli. Rezervo termin online dhe dërgo kërkesën direkt në WhatsApp." />
+  <meta name="robots" content="index, follow" />
+
+  <style>
+    :root{
+      --bg:#070b14;
+      --text: rgba(245,248,255,.96);
+      --muted: rgba(245,248,255,.72);
+      --border: rgba(255,255,255,.14);
+      --glass: rgba(255,255,255,.08);
+      --glass2: rgba(255,255,255,.06);
+      --shadow: 0 20px 80px rgba(0,0,0,.55);
+      --radius: 22px;
+      --max: 1160px;
+      --accent: #58b8ff;
+      --accent2:#7c5cff;
+      --ok:#2ee59d;
+      --danger:#ff5c7a;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ margin:0; padding:0; }
+    body{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color: var(--text);
+      background: var(--bg);
+      overflow-x:hidden;
+    }
+    a{ color:inherit; text-decoration:none; }
+
+    /* Background photo + premium overlays */
+    .bg{
+      position:fixed; inset:0; z-index:-4;
+      background:
+        linear-gradient(180deg, rgba(7,11,20,.50), rgba(7,11,20,.88)),
+        url("assets/bg.jpg") center/cover no-repeat;
+      filter: saturate(1.05) contrast(1.06);
+      transform: scale(1.02);
+    }
+    .glow{
+      position:fixed; inset:-140px; z-index:-3;
+      background:
+        radial-gradient(900px 540px at 12% 12%, rgba(88,184,255,.20), transparent 60%),
+        radial-gradient(760px 560px at 84% 16%, rgba(124,92,255,.18), transparent 60%),
+        radial-gradient(900px 720px at 46% 96%, rgba(46,229,157,.10), transparent 60%);
+      pointer-events:none;
+    }
+    .noise{
+      position:fixed; inset:0; z-index:-2;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+      opacity:.18;
+      mix-blend-mode: overlay;
+      pointer-events:none;
+    }
+
+    .container{ max-width:var(--max); margin:0 auto; padding:0 18px; }
+
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: rgba(7,11,20,.55);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px; padding: 14px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      white-space:nowrap;
+    }
+    .brandLogo{
+      width:46px; height:46px; border-radius:16px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      overflow:hidden;
+      display:grid; place-items:center;
+      box-shadow: 0 18px 55px rgba(0,0,0,.35);
+    }
+    .brandLogo img{
+      width:100%; height:100%; object-fit:cover; display:block;
+    }
+    .brandText b{
+      display:block;
+      font-weight: 950;
+      letter-spacing: -.2px;
+    }
+    .brandText small{
+      display:block;
+      color: rgba(245,248,255,.70);
+      font-weight: 850;
+      margin-top:2px;
+    }
+
+    .links{
+      display:flex; gap:16px; align-items:center;
+      font-weight: 850;
+      font-size: 14px;
+      color: rgba(245,248,255,.84);
+    }
+    .links a{ opacity:.78 }
+    .links a:hover{ opacity:1 }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding: 11px 14px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      font-weight: 950;
+      font-size: 14px;
+      cursor:pointer;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      user-select:none;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.10);
+      border-color: rgba(255,255,255,.22);
+    }
+    .btnPrimary{
+      background: linear-gradient(135deg, rgba(88,184,255,1), rgba(124,92,255,1));
+      border-color: rgba(255,255,255,.18);
+      box-shadow: 0 18px 60px rgba(88,184,255,.18);
+    }
+
+    /* Hero */
+    .hero{ padding: 44px 0 22px; }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+    .card{
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .cardInner{ padding: 26px; }
+
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.07);
+      font-weight: 950;
+      font-size: 13px;
+      color: rgba(245,248,255,.92);
+    }
+    h1{
+      margin: 14px 0 10px;
+      font-size: clamp(30px, 4.4vw, 52px);
+      line-height: 1.04;
+      letter-spacing: -.9px;
+    }
+    .sub{
+      margin:0;
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 64ch;
+    }
+    .heroActions{ display:flex; flex-wrap:wrap; gap:10px; margin-top: 18px; }
+
+    .kpis{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .kpi{
+      padding: 12px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(10,16,30,.50);
+    }
+    .kpi b{ display:block; font-size:14px; font-weight:950; }
+    .kpi span{ display:block; margin-top:4px; color: rgba(245,248,255,.70); font-size: 13px; }
+
+    /* Booking form (premium) */
+    .formTitle{
+      margin:0;
+      font-size: 18px;
+      font-weight: 980;
+      letter-spacing: -.2px;
+    }
+    .formHint{
+      margin: 8px 0 0;
+      color: rgba(245,248,255,.72);
+      font-size: 13px;
+    }
+    .form{
+      margin-top: 14px;
+      display:grid;
+      gap: 10px;
+    }
+    .row2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .field{
+      display:grid;
+      gap: 8px;
+    }
+    label{
+      font-size: 12px;
+      color: rgba(245,248,255,.72);
+      font-weight: 900;
+      letter-spacing: .2px;
+    }
+    input, select, textarea{
+      width:100%;
+      padding: 12px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      outline:none;
+      font-size: 14px;
+    }
+    input::placeholder, textarea::placeholder{ color: rgba(245,248,255,.45); }
+    textarea{ resize: vertical; min-height: 92px; }
+
+    .error{
+      display:none;
+      padding: 10px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,92,122,.30);
+      background: rgba(255,92,122,.10);
+      color: rgba(255,225,232,.95);
+      font-weight: 900;
+      font-size: 13px;
+    }
+    .finePrint{
+      margin-top: 10px;
+      color: rgba(245,248,255,.62);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    /* Sections */
+    section{ padding: 22px 0; }
+    .sectionTitle{
+      margin: 0 0 12px;
+      font-size: 20px;
+      font-weight: 980;
+      letter-spacing: -.3px;
+    }
+    .sectionSub{
+      margin: 0 0 16px;
+      color: rgba(245,248,255,.74);
+      font-size: 14px;
+      max-width: 90ch;
+    }
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .service{
+      border-radius: var(--radius);
+      background: rgba(10,16,30,.45);
+      border: 1px solid rgba(255,255,255,.10);
+      padding: 16px;
+      min-height: 132px;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+    }
+    .service:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.18);
+      background: rgba(10,16,30,.58);
+    }
+    .service h3{ margin:0 0 6px; font-size: 16px; font-weight: 980; }
+    .service p{ margin:0; color: rgba(245,248,255,.74); font-size: 14px; }
+
+    .split{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* Floating WhatsApp */
+    .waFloat{
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 80;
+      border-radius: 999px;
+      padding: 12px 14px;
+      display:flex; align-items:center; gap:10px;
+      background: rgba(46,229,157,.14);
+      border: 1px solid rgba(46,229,157,.30);
+      box-shadow: 0 18px 60px rgba(0,0,0,.45);
+      color: rgba(245,248,255,.96);
+      font-weight: 980;
+      transition: transform .15s ease, background .15s ease;
+    }
+    .waFloat:hover{ transform: translateY(-2px); background: rgba(46,229,157,.18); }
+    .waIcon{
+      width:34px;height:34px;border-radius:999px;
+      display:grid; place-items:center;
+      background: rgba(46,229,157,.22);
+      border: 1px solid rgba(46,229,157,.35);
+    }
+
+    footer{
+      padding: 28px 0 40px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      color: rgba(245,248,255,.70);
+      font-size: 13px;
+      margin-top: 10px;
+    }
+    .footerRow{
+      display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;
+      align-items:flex-start;
+    }
+    .miniLinks{ display:flex; gap:12px; flex-wrap:wrap; }
+    .miniLinks a{ opacity:.8 }
+    .miniLinks a:hover{ opacity:1 }
+
+    /* Reveal */
+    @keyframes rise{ from{opacity:0; transform: translateY(10px)} to{opacity:1; transform: translateY(0)} }
+    .reveal{ animation: rise .6s ease both; }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .heroGrid{ grid-template-columns: 1fr; }
+      .kpis{ grid-template-columns: 1fr; }
+      .grid3{ grid-template-columns: 1fr; }
+      .split{ grid-template-columns: 1fr; }
+      .row2{ grid-template-columns: 1fr; }
+      .links{ display:none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg"></div>
+  <div class="glow"></div>
+  <div class="noise"></div>
+
+  <header>
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="#top">
+          <div class="brandLogo" aria-label="Logo">
+            <!-- Placeholder logo -->
+            <img src="assets/logo.png" alt="Logo" />
+          </div>
+          <div class="brandText">
+            <b>Ordinanca Stomatologjike</b>
+            <small>Dr. Besfort M Xhemajli</small>
+          </div>
+        </a>
+
+        <nav class="links" aria-label="Navigimi">
+          <a href="#sherbime">Shërbime</a>
+          <a href="#si-punojme">Si punojmë</a>
+          <a href="#rezervo">Rezervo</a>
+        </nav>
+
+        <a class="btn btnPrimary" id="waTop" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="container hero">
+      <div class="heroGrid">
+        <!-- Left: message -->
+        <div class="card reveal">
+          <div class="cardInner">
+            <div class="badge">🦷 Kujdes modern • Qasje 1-me-1 • Rezervim i shpejtë</div>
+            <h1>Buzëqeshje e pastër.<br/>Trajtim i qetë. Rezultat i saktë.</h1>
+            <p class="sub">
+              Ordinancë private me fokus te cilësia dhe komunikimi i drejtë.
+              Rezervimi bëhet online dhe kërkesa dërgohet direkt në WhatsApp.
+            </p>
+
+            <div class="heroActions">
+              <a class="btn btnPrimary" href="#rezervo">Rezervo Termin</a>
+              <a class="btn" href="#sherbime">Shërbimet</a>
+              <a class="btn" id="waHero" href="#" target="_blank" rel="noopener">Shkruaj në WhatsApp</a>
+            </div>
+
+            <div class="kpis">
+              <div class="kpi">
+                <b>✅ Qasje 1-me-1</b>
+                <span>Një pacient në fokus, pa nxitim.</span>
+              </div>
+              <div class="kpi">
+                <b>🧼 Standard higjiene</b>
+                <span>Protokolle të rregullta dhe ambient i pastër.</span>
+              </div>
+              <div class="kpi">
+                <b>💬 Konfirmim i shpejtë</b>
+                <span>WhatsApp – e thjeshtë dhe direkt.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: booking form -->
+        <div class="card reveal" style="animation-delay:.08s" id="rezervo">
+          <div class="cardInner">
+            <h2 class="formTitle">Rezervo Termin</h2>
+            <p class="formHint">Plotëso të dhënat. Pastaj kliko “Dërgo në WhatsApp”.</p>
+
+            <div class="error" id="errBox">Ju lutem plotësoni fushat kryesore (Emri, Telefoni, Data/Koha).</div>
+
+            <form class="form" onsubmit="return sendBookingToWhatsApp();">
+              <div class="field">
+                <label for="name">Emri dhe Mbiemri</label>
+                <input id="name" name="name" placeholder="p.sh. Arben Krasniqi" autocomplete="name" />
+              </div>
+
+              <div class="row2">
+                <div class="field">
+                  <label for="phone">Numri i telefonit</label>
+                  <input id="phone" name="phone" placeholder="p.sh. +383 44 123 456" autocomplete="tel" />
+                </div>
+                <div class="field">
+                  <label for="service">Arsyeja / Shërbimi</label>
+                  <select id="service" name="service">
+                    <option value="Kontroll">Kontroll</option>
+                    <option value="Pastrimi profesional">Pastrimi profesional</option>
+                    <option value="Dhimbje / emergjencë">Dhimbje / emergjencë</option>
+                    <option value="Mbushje / karies">Mbushje / karies</option>
+                    <option value="Estetikë dentare">Estetikë dentare</option>
+                    <option value="Tjetër">Tjetër</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row2">
+                <div class="field">
+                  <label for="date">Data e preferuar</label>
+                  <input id="date" name="date" type="date" />
+                </div>
+                <div class="field">
+                  <label for="time">Koha e preferuar</label>
+                  <input id="time" name="time" type="time" />
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="note">Shënim (opsionale)</label>
+                <textarea id="note" name="note" placeholder="Shkruaj shkurt: sa kohë ke dhimbje, ndjeshmëri, etj."></textarea>
+              </div>
+
+              <button class="btn btnPrimary" type="submit" style="width:100%; justify-content:center;">
+                ✅ Dërgo në WhatsApp
+              </button>
+
+              <p class="finePrint">
+                * Çmimet caktohen në ordinancë sipas rastit dhe trajtimit. <br/>
+                * Përgjigjemi sa më shpejt për konfirmim të terminit.
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Services -->
+    <section id="sherbime">
+      <div class="container">
+        <h2 class="sectionTitle">Shërbime</h2>
+        <p class="sectionSub">
+          Listë bazë — mund ta personalizoj sipas asaj që ofron realisht ordinanca.
+        </p>
+
+        <div class="grid3">
+          <div class="service reveal">
+            <h3>Kontroll & Plan trajtimi</h3>
+            <p>Vlerësim i saktë dhe shpjegim i qartë i opsioneve.</p>
+          </div>
+          <div class="service reveal" style="animation-delay:.05s">
+            <h3>Pastrimi profesional</h3>
+            <p>Higjienë e thellë dhe udhëzime për mirëmbajtje.</p>
+          </div>
+          <div class="service reveal" style="animation-delay:.10s">
+            <h3>Trajtim i kariesit</h3>
+            <p>Intervenim minimal, material cilësor, rezultat i pastër.</p>
+          </div>
+          <div class="service reveal" style="animation-delay:.15s">
+            <h3>Estetikë dentare</h3>
+            <p>Fokus te natyraliteti — jo “plastike”.</p>
+          </div>
+          <div class="service reveal" style="animation-delay:.20s">
+            <h3>Emergjencë</h3>
+            <p>Dhimbje/ndjeshmëri — na shkruani për slot të shpejtë.</p>
+          </div>
+          <div class="service reveal" style="animation-delay:.25s">
+            <h3>Këshillim</h3>
+            <p>Rekomandime praktike për higjienë dhe rutinë.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="si-punojme">
+      <div class="container">
+        <h2 class="sectionTitle">Si punojmë</h2>
+        <p class="sectionSub">3 hapa, pa komplikime.</p>
+
+        <div class="split">
+          <div class="service reveal">
+            <h3>1) Rezervo online</h3>
+            <p>Zgjedh shërbimin + datën/koha e preferuar.</p>
+          </div>
+          <div class="service reveal" style="animation-delay:.06s">
+            <h3>2) Dërgo në WhatsApp</h3>
+            <p>Mesazhi gjenerohet automatikisht — vetëm “Send”.</p>
+          </div>
+          <div class="service reveal" style="animation-delay:.12s">
+            <h3>3) Konfirmimi</h3>
+            <p>Konfirmojmë terminin dhe detajet sa më shpejt.</p>
+          </div>
+          <div class="service reveal" style="animation-delay:.18s">
+            <h3>Qetësi & privatësi</h3>
+            <p>Komunikim i qartë dhe respekt për kohën tuaj.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="footerRow">
+          <div>
+            <div style="font-weight:980;color:rgba(245,248,255,.90)">Ordinanca Stomatologjike Dr. Besfort M Xhemajli</div>
+            <div style="margin-top:6px">Rezervim vetëm përmes WhatsApp • © <span id="y"></span></div>
+          </div>
+          <div class="miniLinks">
+            <a href="#sherbime">Shërbime</a>
+            <a href="#si-punojme">Si punojmë</a>
+            <a href="#rezervo">Rezervo</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Floating WhatsApp -->
+  <a class="waFloat" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <span class="waIcon">💬</span> WhatsApp
+  </a>
+
+  <script>
+    // ✅ Ndrysho vetëm këtu (pa +, vetëm numra) p.sh. 38344123456
+    const WHATSAPP_NUMBER = "383XXXXXXXXX";
+
+    // Default text (kur klikon vetëm WhatsApp)
+    const QUICK_TEXT = encodeURIComponent("Përshëndetje Dr. Besfort, dua të rezervoj termin.");
+
+    function waQuickLink(){
+      return `https://wa.me/${WHATSAPP_NUMBER}?text=${QUICK_TEXT}`;
+    }
+
+    // Attach quick links
+    ["waTop","waHero","waFloat"].forEach(id => {
+      const el = document.getElementById(id);
+      if(el) el.href = waQuickLink();
+    });
+
+    function sendBookingToWhatsApp(){
+      const err = document.getElementById("errBox");
+      err.style.display = "none";
+
+      const name = (document.getElementById("name").value || "").trim();
+      const phone = (document.getElementById("phone").value || "").trim();
+      const service = document.getElementById("service").value;
+      const date = document.getElementById("date").value;
+      const time = document.getElementById("time").value;
+      const note = (document.getElementById("note").value || "").trim();
+
+      // Basic validation
+      if(!name || !phone || !date || !time){
+        err.style.display = "block";
+        return false;
+      }
+
+      const msgLines = [
+        "Përshëndetje Dr. Besfort, dua të rezervoj termin:",
+        "",
+        `Emri: ${name}`,
+        `Telefoni: ${phone}`,
+        `Shërbimi: ${service}`,
+        `Data/Koha: ${date} - ${time}`,
+        note ? `Shënim: ${note}` : null
+      ].filter(Boolean);
+
+      const text = encodeURIComponent(msgLines.join("\n"));
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
+      window.open(url, "_blank", "noopener");
+      return false;
+    }
+
+    // Year
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
